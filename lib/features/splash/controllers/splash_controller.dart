@@ -1,20 +1,38 @@
-import 'package:bit_mascot_assessment/core/routes/app_routes.dart';
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import '../../../core/routes/app_routes.dart';
 
-class SplashController extends GetxController {
+class SplashController extends GetxController
+    with GetSingleTickerProviderStateMixin {
+  late AnimationController animationController;
+  late Animation<double> fadeAnimation;
+
   @override
   void onInit() {
     super.onInit();
-    // Initialize any necessary data or services here
-    print('SplashController initialized');
+    animationController = AnimationController(
+      vsync: this,
+      duration: const Duration(seconds: 2),
+    );
+
+    fadeAnimation = Tween<double>(
+      begin: 0,
+      end: 1,
+    ).animate(animationController);
+    animationController.forward();
   }
 
   @override
   void onReady() {
     super.onReady();
-    // Navigate to the home screen after a delay or condition
     Future.delayed(const Duration(seconds: 2), () {
       Get.offNamed(AppRoutes.home);
     });
+  }
+
+  @override
+  void onClose() {
+    animationController.dispose();
+    super.onClose();
   }
 }

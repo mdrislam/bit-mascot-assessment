@@ -1,3 +1,4 @@
+import 'package:bit_mascot_assessment/core/theme/app_colors.dart';
 import 'package:bit_mascot_assessment/core/theme/app_sizes.dart';
 import 'package:bit_mascot_assessment/core/theme/app_text_styles.dart';
 import 'package:bit_mascot_assessment/core/utils/app_responsive_info.dart';
@@ -36,7 +37,7 @@ class AppTextfield extends StatelessWidget {
         floatingLabelBehavior: FloatingLabelBehavior.always,
       ),
       validator: validator,
-      style: AppTextStyles.body,
+      style: AppTextStyles.body.copyWith(color: AppColors.textPrimary),
     );
   }
 }

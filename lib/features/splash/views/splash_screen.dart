@@ -21,7 +21,7 @@ class SplashScreen extends GetView<SplashController> {
             children: [
               FlutterLogo(size: AppResponsiveInfo.icon(AppSizes.logoIcon)),
               SizedBox(height: AppResponsiveInfo.spacingSmall),
-              Text(AppStrings.appName, style: AppTextStyles.headline1),
+              Text(AppStrings.appName, style: AppTextStyles.headline2),
             ],
           ),
         ),

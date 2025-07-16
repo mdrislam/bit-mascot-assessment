@@ -38,4 +38,6 @@ class AppSizes {
   static const double formFieldWidth = 300;
   // Button sizes
   static const double buttonHeight = 55;
+  //loading indicator stock
+  static const double loadingIndicatorStock = 2;
 }

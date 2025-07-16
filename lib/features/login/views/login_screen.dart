@@ -109,7 +109,7 @@ class LoginScreen extends GetView<LoginController> {
                     onPressed: controller.forgotPassword,
                     child: Text(
                       AppStrings.forgotpassword,
-                      style: AppTextStyles.bodySmall.copyWith(
+                      style: AppTextStyles.body.copyWith(
                         color: AppColors.primary,
                         decoration: TextDecoration.underline,
                       ),

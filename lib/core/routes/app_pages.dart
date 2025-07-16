@@ -1,4 +1,5 @@
 import 'package:bit_mascot_assessment/core/routes/app_routes.dart';
+import 'package:bit_mascot_assessment/data/remote/featurs/home/repositories/home_repositories.dart';
 import 'package:bit_mascot_assessment/features/home/controllers/home_controller.dart';
 import 'package:bit_mascot_assessment/features/home/views/home_screen.dart';
 import 'package:bit_mascot_assessment/features/login/controllers/login_controller.dart';
@@ -20,7 +21,9 @@ abstract class AppPages {
       name: AppRoutes.home,
       page: () => HomeScreen(),
       binding: BindingsBuilder(() {
-        Get.lazyPut<HomeController>(() => HomeController());
+        Get.lazyPut<HomeController>(
+          () => HomeController(repository: HomeRepositories()),
+        );
       }),
     ),
     GetPage(

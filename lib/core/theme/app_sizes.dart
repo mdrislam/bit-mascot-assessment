@@ -32,4 +32,10 @@ class AppSizes {
 
   // Container sizes
   static const double containerheight = 200;
+
+  // Form field sizes
+  static const double formFieldHeight = 50;
+  static const double formFieldWidth = 300;
+  // Button sizes
+  static const double buttonHeight = 55;
 }

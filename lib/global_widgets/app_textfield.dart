@@ -1,3 +1,6 @@
+import 'package:bit_mascot_assessment/core/theme/app_sizes.dart';
+import 'package:bit_mascot_assessment/core/theme/app_text_styles.dart';
+import 'package:bit_mascot_assessment/core/utils/app_responsive_info.dart';
 import 'package:flutter/material.dart';
 
 class AppTextfield extends StatelessWidget {
@@ -25,11 +28,15 @@ class AppTextfield extends StatelessWidget {
       decoration: InputDecoration(
         labelText: label,
         hintText: hintText,
-        border: OutlineInputBorder(borderRadius: BorderRadius.circular(8)),
+        border: OutlineInputBorder(
+          borderRadius: AppResponsiveInfo.borderRadiusAll(
+            AppSizes.paddingSmall,
+          ),
+        ),
         floatingLabelBehavior: FloatingLabelBehavior.always,
       ),
       validator: validator,
-      style: TextStyle(fontSize: 16, color: Colors.black87),
+      style: AppTextStyles.body,
     );
   }
 }

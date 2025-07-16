@@ -7,6 +7,6 @@ class HomeScreen extends GetView<HomeController> {
 
   @override
   Widget build(BuildContext context) {
-    return  Scaffold(appBar:AppBar() ,);
+    return const Scaffold();
   }
 }

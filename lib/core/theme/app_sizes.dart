@@ -36,6 +36,7 @@ class AppSizes {
   // Form field sizes
   static const double formFieldHeight = 50;
   static const double formFieldWidth = 300;
+  static const double apBarHeight = 300;
   // Button sizes
   static const double buttonHeight = 55;
   //loading indicator stock
@@ -50,4 +51,7 @@ class AppSizes {
   // List item height
   static const double shimmerItemheight = 10;
   static const double shimmerItemRedius = 30;
+  //details screen
+  static const double detailsScreenImagewidth = 100;
+  static const double detailsScreenImageheight = 200;
 }

@@ -1,5 +1,7 @@
 import 'package:bit_mascot_assessment/core/routes/app_routes.dart';
 import 'package:bit_mascot_assessment/data/remote/featurs/home/repositories/home_repositories.dart';
+import 'package:bit_mascot_assessment/features/details/controllers/details_controller.dart';
+import 'package:bit_mascot_assessment/features/details/views/details_screen.dart';
 import 'package:bit_mascot_assessment/features/favorite/controllers/favourite_controller.dart';
 import 'package:bit_mascot_assessment/features/favorite/views/favorite_screen.dart';
 import 'package:bit_mascot_assessment/features/home/controllers/home_controller.dart';
@@ -41,6 +43,13 @@ abstract class AppPages {
       page: () => const FavoriteScreen(),
       binding: BindingsBuilder(() {
         Get.lazyPut<FavouriteController>(() => FavouriteController());
+      }),
+    ),
+    GetPage(
+      name: AppRoutes.details,
+      page: () => const MovieDetailScreen(),
+      binding: BindingsBuilder(() {
+        Get.lazyPut<DetailsController>(() => DetailsController());
       }),
     ),
   ];

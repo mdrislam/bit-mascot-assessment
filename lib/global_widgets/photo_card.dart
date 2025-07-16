@@ -27,16 +27,13 @@ class PhotoCard extends StatelessWidget {
         AppResponsiveInfo.screenWidth * AppSizes.imageHeightRatioHeight;
 
     return Card(
-      margin: AppResponsiveInfo.paddingSymmetric(
-        horizontal: AppSizes.paddingMedium,
-        vertical: AppSizes.paddingSmall,
-      ),
+      
       elevation: AppSizes.cardElevationZero,
-      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(1)),
       color: AppColors.surface,
       child: ListTile(
         contentPadding: AppResponsiveInfo.paddingSymmetric(
-          horizontal: AppSizes.paddingMedium,
+          horizontal: AppSizes.paddingSmall,
           vertical: AppSizes.paddingSmall,
         ),
         leading: ClipRRect(
@@ -44,7 +41,8 @@ class PhotoCard extends StatelessWidget {
             AppSizes.paddingSmall,
           ),
           child: Image.network(
-            photo.thumbnailUrl,
+            // photo.thumbnailUrl,
+            'https://i.ebayimg.com/images/g/NTYAAOSwgBhjwKJf/s-l1200.jpg',
             width: imageSize,
             height: imageSizehight,
             fit: BoxFit.cover,

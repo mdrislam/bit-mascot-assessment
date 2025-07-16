@@ -3,6 +3,7 @@ import 'package:bit_mascot_assessment/core/theme/app_colors.dart';
 import 'package:bit_mascot_assessment/core/theme/app_sizes.dart';
 
 import 'package:bit_mascot_assessment/core/utils/app_responsive_info.dart';
+
 import 'package:bit_mascot_assessment/features/home/controllers/home_controller.dart';
 import 'package:bit_mascot_assessment/global_widgets/photo_card.dart';
 import 'package:bit_mascot_assessment/global_widgets/photos_loader_effect.dart';
@@ -65,7 +66,9 @@ class HomeScreen extends GetView<HomeController> {
 
                 onFavorite: () =>
                     controller.toggleFavorite(controller.photos[index]),
-                onTap: () {},
+                onTap: () {
+                  Get.toNamed(AppRoutes.details);
+                },
               );
             } else {
               return controller.isLoading.value

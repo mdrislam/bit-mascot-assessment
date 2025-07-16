@@ -1,51 +1,53 @@
 import 'package:bit_mascot_assessment/core/theme/app_colors.dart';
+import 'package:bit_mascot_assessment/core/theme/app_sizes.dart';
+import 'package:bit_mascot_assessment/core/utils/app_responsive_info.dart';
 import 'package:flutter/material.dart';
 
 class AppTextStyles {
   // Headlines
-  static const TextStyle headline1 = TextStyle(
-    fontSize: 32,
+  static TextStyle get headline1 => TextStyle(
+    fontSize: AppResponsiveInfo.sp(AppSizes.textExtraExtraLarge),
     fontWeight: FontWeight.bold,
     color: AppColors.textPrimary,
   );
 
-  static const TextStyle headline2 = TextStyle(
-    fontSize: 24,
+  static TextStyle get headline2 => TextStyle(
+    fontSize: AppResponsiveInfo.sp(AppSizes.textExtraLarge),
     fontWeight: FontWeight.bold,
     color: AppColors.textPrimary,
   );
 
   // Body Texts
-  static const TextStyle bodyLarge = TextStyle(
-    fontSize: 18,
+  static TextStyle get bodyLarge => TextStyle(
+    fontSize: AppResponsiveInfo.sp(AppSizes.textLarge),
     color: AppColors.textPrimary,
   );
 
-  static const TextStyle body = TextStyle(
-    fontSize: 16,
+  static TextStyle get body => TextStyle(
+    fontSize: AppResponsiveInfo.sp(AppSizes.textMedium),
     color: AppColors.textSecondary,
   );
 
-  static const TextStyle bodySmall = TextStyle(
-    fontSize: 14,
+  static TextStyle get bodySmall => TextStyle(
+    fontSize: AppResponsiveInfo.sp(AppSizes.textSmall),
     color: AppColors.textSecondary,
   );
 
-  // Form
-  static const TextStyle formLabel = TextStyle(
-    fontSize: 14,
+  // Form Labels & Hints
+  static TextStyle get formLabel => TextStyle(
+    fontSize: AppResponsiveInfo.sp(AppSizes.textSmall),
     color: AppColors.textPrimary,
     fontWeight: FontWeight.w500,
   );
 
-  static const TextStyle formHint = TextStyle(
-    fontSize: 14,
+  static TextStyle get formHint => TextStyle(
+    fontSize: AppResponsiveInfo.sp(AppSizes.textSmall),
     color: AppColors.textHint,
   );
 
   // Buttons
-  static const TextStyle button = TextStyle(
-    fontSize: 16,
+  static TextStyle get button => TextStyle(
+    fontSize: AppResponsiveInfo.sp(AppSizes.textMedium),
     fontWeight: FontWeight.bold,
     color: Colors.white,
   );

@@ -1,6 +1,7 @@
 import 'package:bit_mascot_assessment/core/constants/app_strings.dart';
 import 'package:bit_mascot_assessment/core/routes/app_routes.dart';
 import 'package:bit_mascot_assessment/core/theme/app_colors.dart';
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'core/routes/app_pages.dart';

@@ -26,12 +26,18 @@ class SplashController extends GetxController
   void onReady() {
     super.onReady();
     Future.delayed(const Duration(seconds: 2), () {
-      Get.offNamed(AppRoutes.home);
+
+      // Simulating a delay for splash screen
+      Get.offNamed(AppRoutes.login);
     });
   }
 
   @override
   void onClose() {
+    // Dispose the animation controller when the controller is closed
+    if (animationController.isAnimating) {
+      animationController.stop();
+    }
     animationController.dispose();
     super.onClose();
   }

@@ -1,51 +1,26 @@
 import 'package:bit_mascot_assessment/data/local/app_local_storage.dart';
 import 'package:bit_mascot_assessment/data/remote/featurs/home/models/photo_model.dart';
-import 'package:bit_mascot_assessment/data/remote/featurs/home/repositories/home_repositories.dart';
 import 'package:bit_mascot_assessment/global_widgets/snakbar_utils.dart';
-import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-class HomeController extends GetxController {
-  HomeController({required HomeRepositories repository})
-    : _repository = repository;
-
-  final HomeRepositories _repository;
-  final RxList<PhotoModel> photos = <PhotoModel>[].obs;
-  List<PhotoModel> favoritePhotos = <PhotoModel>[];
+class FavouriteController extends GetxController {
+  RxList<PhotoModel> favoritePhotos = <PhotoModel>[].obs;
   final isLoading = false.obs;
-  final scrollController = ScrollController();
-  int _page = 1;
-  final int _limit = 10;
 
   @override
   void onInit() {
     loadFavorites();
-    fetchPhotos();
-    _setupScrollController();
+
     super.onInit();
   }
 
-  void _setupScrollController() {
-    scrollController.addListener(() {
-      if (scrollController.position.pixels ==
-          scrollController.position.maxScrollExtent) {
-        fetchPhotos();
-      }
-    });
-  }
-
-  Future<void> fetchPhotos() async {
+  Future<void> loadFavorites() async {
     if (isLoading.value) return;
 
     isLoading.value = true;
     try {
-      final newPhotos = await _repository.getPhotos(
-        page: _page,
-        limit: _limit,
-        favoriteIds: favoritePhotos,
-      );
-      photos.addAll(newPhotos);
-      _page++;
+      final stored = AppLocalStorage.getFavoritePhotos();
+      favoritePhotos.assignAll(stored);
     } catch (e) {
       SnackbarUtil.show('Failed to load photos', type: SnackbarType.error);
     } finally {
@@ -78,9 +53,4 @@ class HomeController extends GetxController {
   }
 
   bool isFavorite(int id) => favoritePhotos.any((p) => p.id == id);
-
-  void loadFavorites() {
-    final stored = AppLocalStorage.getFavoritePhotos();
-    favoritePhotos.assignAll(stored);
-  }
 }

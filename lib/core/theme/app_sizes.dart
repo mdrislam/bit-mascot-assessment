@@ -42,6 +42,7 @@ class AppSizes {
   static const double loadingIndicatorStock = 2;
   //image height ratio
   static const double imageHeightRatio = 0.15;
+  static const double imageHeightRatioHeight = 0.20;
   // Card elevation
   static const double cardElevationZero = 0;
   //separator height

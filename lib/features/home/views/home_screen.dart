@@ -1,13 +1,16 @@
+import 'package:bit_mascot_assessment/core/routes/app_routes.dart';
 import 'package:bit_mascot_assessment/core/theme/app_colors.dart';
 import 'package:bit_mascot_assessment/core/theme/app_sizes.dart';
 
 import 'package:bit_mascot_assessment/core/utils/app_responsive_info.dart';
 import 'package:bit_mascot_assessment/features/home/controllers/home_controller.dart';
-import 'package:bit_mascot_assessment/features/home/views/components/photo_card.dart';
+import 'package:bit_mascot_assessment/global_widgets/photo_card.dart';
 import 'package:bit_mascot_assessment/global_widgets/photos_loader_effect.dart';
 
 import 'package:flutter/material.dart';
-import 'package:get/state_manager.dart';
+import 'package:get/get.dart';
+
+import '../../../core/theme/app_text_styles.dart';
 
 class HomeScreen extends GetView<HomeController> {
   const HomeScreen({super.key});
@@ -20,7 +23,9 @@ class HomeScreen extends GetView<HomeController> {
         title: const Text('Photos List'),
         actions: [
           IconButton(
-            onPressed: () {},
+            onPressed: () {
+              Get.toNamed(AppRoutes.favorite);
+            },
             icon: Icon(
               Icons.favorite,
               color: AppColors.error,
@@ -33,6 +38,15 @@ class HomeScreen extends GetView<HomeController> {
       body: Obx(() {
         if (controller.isLoading.value && controller.photos.isEmpty) {
           return PhotosLoaderEffect();
+        } else if (controller.photos.isEmpty) {
+          return Center(
+            child: Text(
+              'No photos available',
+              style: AppTextStyles.headline1.copyWith(
+                color: AppColors.textSecondary,
+              ),
+            ),
+          );
         }
         return ListView.separated(
           controller: controller.scrollController,

@@ -10,17 +10,21 @@ class PhotoCard extends StatelessWidget {
   final PhotoModel photo;
   final VoidCallback onFavorite;
   final VoidCallback onTap;
+  final bool forHome;
 
   const PhotoCard({
     super.key,
     required this.photo,
     required this.onFavorite,
     required this.onTap,
+    this.forHome = true,
   });
 
   @override
   Widget build(BuildContext context) {
     final imageSize = AppResponsiveInfo.screenWidth * AppSizes.imageHeightRatio;
+    final imageSizehight =
+        AppResponsiveInfo.screenWidth * AppSizes.imageHeightRatioHeight;
 
     return Card(
       margin: AppResponsiveInfo.paddingSymmetric(
@@ -42,13 +46,13 @@ class PhotoCard extends StatelessWidget {
           child: Image.network(
             photo.thumbnailUrl,
             width: imageSize,
-            height: imageSize,
+            height: imageSizehight,
             fit: BoxFit.cover,
             loadingBuilder: (context, child, loadingProgress) {
               if (loadingProgress == null) return child;
               return SizedBox(
                 width: imageSize,
-                height: imageSize,
+                height: imageSizehight,
                 child: Center(
                   child: CircularProgressIndicator(
                     strokeWidth: 2,
@@ -83,20 +87,27 @@ class PhotoCard extends StatelessWidget {
                 color: AppColors.textSecondary,
               ),
             ),
-            Icon(Icons.star,
-                color: AppColors.warning, size: AppResponsiveInfo.icon(AppSizes.iconSmall)),
-          ],
-        ),
-        trailing: Obx(
-          () => IconButton(
-            onPressed: onFavorite,
-            icon: Icon(
-              photo.isFavorite.value ? Icons.favorite : Icons.favorite_border,
-              color: Colors.red,
+            Icon(
+              Icons.star,
+              color: AppColors.warning,
               size: AppResponsiveInfo.icon(AppSizes.iconSmall),
             ),
-          ),
+          ],
         ),
+        trailing: forHome
+            ? Obx(
+                () => IconButton(
+                  onPressed: onFavorite,
+                  icon: Icon(
+                    photo.isFavorite.value
+                        ? Icons.favorite
+                        : Icons.favorite_border,
+                    color: Colors.red,
+                    size: AppResponsiveInfo.icon(AppSizes.iconSmall),
+                  ),
+                ),
+              )
+            : SizedBox.shrink(),
         onTap: onTap,
       ),
     );

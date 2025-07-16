@@ -33,10 +33,10 @@ class MovieDetailScreen extends GetView<DetailsController> {
               onPressed: () => Get.back(),
             ),
             actions: [
-              IconButton(
-                icon: const Icon(Icons.favorite_border, color: AppColors.white),
-                onPressed: () {},
-              ),
+              // IconButton(
+              //   icon: const Icon(Icons.favorite_border, color: AppColors.white),
+              //   onPressed: () {},
+              // ),
             ],
           ),
           SliverToBoxAdapter(

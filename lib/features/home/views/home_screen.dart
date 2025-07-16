@@ -1,6 +1,8 @@
+import 'package:bit_mascot_assessment/core/theme/app_colors.dart';
+import 'package:bit_mascot_assessment/core/theme/app_sizes.dart';
+import 'package:bit_mascot_assessment/core/utils/app_responsive_info.dart';
 import 'package:bit_mascot_assessment/features/home/controllers/home_controller.dart';
 import 'package:bit_mascot_assessment/features/home/views/components/photo_card.dart';
-
 
 import 'package:flutter/material.dart';
 import 'package:get/state_manager.dart';
@@ -12,14 +14,23 @@ class HomeScreen extends GetView<HomeController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: AppColors.surface,
       appBar: AppBar(title: const Text('Movie List')),
       body: Obx(() {
         if (controller.isLoading.value && controller.photos.isEmpty) {
           return _buildShimmerLoader();
         }
-        return ListView.builder(
+        return ListView.separated(
           controller: controller.scrollController,
           itemCount: controller.photos.length + 1,
+          separatorBuilder: (context, index) =>
+              Padding(
+                padding: AppResponsiveInfo.paddingSymmetric(
+                  horizontal: 10,
+                  vertical: 3,
+                ),
+                child: Divider(color: AppColors.divider, height: 1, thickness: 1),
+              ),
           itemBuilder: (context, index) {
             if (index < controller.photos.length) {
               return PhotoCard(

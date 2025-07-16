@@ -29,5 +29,5 @@ class AppColors {
 
   // Borders & Dividers
   static const Color border = Color(0xFFDDDDDD);
-  static const Color divider = Color(0xFFE0E0E0);
+  static const Color divider = Color.fromARGB(255, 218, 218, 218);
 }

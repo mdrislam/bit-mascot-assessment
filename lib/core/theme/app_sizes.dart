@@ -40,4 +40,10 @@ class AppSizes {
   static const double buttonHeight = 55;
   //loading indicator stock
   static const double loadingIndicatorStock = 2;
+  //image height ratio
+  static const double imageHeightRatio = 0.15;
+  // Card elevation
+  static const double cardElevationZero = 0;
+  //separator height
+  static const double separatorHeight = 2;
 }

@@ -1,8 +1,8 @@
+import 'package:bit_mascot_assessment/core/theme/app_colors.dart';
 import 'package:bit_mascot_assessment/core/theme/app_sizes.dart';
 import 'package:bit_mascot_assessment/core/theme/app_text_styles.dart';
 import 'package:bit_mascot_assessment/core/utils/app_responsive_info.dart';
 import 'package:bit_mascot_assessment/data/remote/featurs/home/models/photo_model.dart';
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -20,54 +20,74 @@ class PhotoCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final screenWidth = MediaQuery.of(context).size.width;
-    final imageSize = screenWidth * 0.15; // 15% of screen width
+    final imageSize = AppResponsiveInfo.screenWidth * AppSizes.imageHeightRatio;
 
     return Card(
       margin: AppResponsiveInfo.paddingSymmetric(
         horizontal: AppSizes.paddingMedium,
         vertical: AppSizes.paddingSmall,
       ),
+      elevation: AppSizes.cardElevationZero,
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+      color: AppColors.surface,
       child: ListTile(
         contentPadding: AppResponsiveInfo.paddingSymmetric(
           horizontal: AppSizes.paddingMedium,
           vertical: AppSizes.paddingSmall,
         ),
-        leading: CachedNetworkImage(
-          imageUrl: photo.thumbnailUrl,
-          width: imageSize,
-          height: imageSize,
-          fit: BoxFit.cover,
-          placeholder: (context, url) => SizedBox(
+        leading: ClipRRect(
+          borderRadius: BorderRadius.circular(8),
+          child: Image.network(
+            photo.thumbnailUrl,
             width: imageSize,
             height: imageSize,
-            child: const Center(
-              child: CircularProgressIndicator(
-                strokeWidth: AppSizes.loadingIndicatorStock,
-              ),
-            ),
+            fit: BoxFit.cover,
+            loadingBuilder: (context, child, loadingProgress) {
+              if (loadingProgress == null) return child;
+              return SizedBox(
+                width: imageSize,
+                height: imageSize,
+                child: Center(
+                  child: CircularProgressIndicator(
+                    strokeWidth: 2,
+                    value: loadingProgress.expectedTotalBytes != null
+                        ? loadingProgress.cumulativeBytesLoaded /
+                              (loadingProgress.expectedTotalBytes ?? 1)
+                        : null,
+                  ),
+                ),
+              );
+            },
+            errorBuilder: (context, error, stackTrace) =>
+                FlutterLogo(size: imageSize),
           ),
-          errorWidget: (context, url, error) => FlutterLogo(size: imageSize),
         ),
         title: Text(
           photo.title,
-          maxLines: 2,
+          maxLines: 1,
           overflow: TextOverflow.ellipsis,
-          style: AppTextStyles.bodyLarge,
+          style: AppTextStyles.body.copyWith(
+            color: AppColors.textPrimary,
+            height: 1.3,
+            fontWeight: FontWeight.w500,
+          ),
         ),
         subtitle: Text(
-          'Album ID: ${photo.albumId}',
-          style: AppTextStyles.bodySmall,
+          '7.5',
+          style: AppTextStyles.body.copyWith(
+            height: 1.3,
+            color: AppColors.textSecondary,
+          ),
         ),
-        trailing: IconButton(
-          icon: Obx(
-            () => Icon(
+        trailing: Obx(
+          () => IconButton(
+            onPressed: onFavorite,
+            icon: Icon(
               photo.isFavorite.value ? Icons.favorite : Icons.favorite_border,
               color: Colors.red,
-              size: screenWidth * 0.06,
+              size: AppResponsiveInfo.icon(AppSizes.iconSmall),
             ),
           ),
-          onPressed: onFavorite,
         ),
         onTap: onTap,
       ),

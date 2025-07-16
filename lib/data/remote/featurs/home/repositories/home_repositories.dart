@@ -4,11 +4,10 @@ import 'package:bit_mascot_assessment/data/remote/helper/api_client_service.dart
 import 'package:bit_mascot_assessment/data/remote/helper/api_exception.dart';
 
 class HomeRepositories {
-
-  Future<List<PhotoModel>> getPhotos( {
+  Future<List<PhotoModel>> getPhotos({
     required int page,
     required int limit,
-    required List<int> favoriteIds,
+    required List<PhotoModel> favoriteIds,
   }) async {
     try {
       final response = await ApiClientService.get(
@@ -16,7 +15,9 @@ class HomeRepositories {
       );
       return response.map<PhotoModel>((json) {
         final model = PhotoModel.fromJson(json);
-        model.isFavorite(favoriteIds.contains(model.id));
+        // Check if this photo is in the favorite list
+        final isFav = favoriteIds.any((fav) => fav.id == model.id);
+        model.isFavorite.value = isFav;
         return model;
       }).toList();
     } catch (e) {

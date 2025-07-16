@@ -1,4 +1,3 @@
-
 import 'package:bit_mascot_assessment/data/local/app_local_storage.dart';
 import 'package:bit_mascot_assessment/data/remote/featurs/home/models/photo_model.dart';
 import 'package:bit_mascot_assessment/data/remote/featurs/home/repositories/home_repositories.dart';
@@ -12,7 +11,7 @@ class HomeController extends GetxController {
 
   final HomeRepositories _repository;
   final RxList<PhotoModel> photos = <PhotoModel>[].obs;
-  List<int> favoriteIds = <int>[];
+  List<PhotoModel> favoritePhotos = <PhotoModel>[];
   final isLoading = false.obs;
   final scrollController = ScrollController();
   int _page = 1;
@@ -43,7 +42,7 @@ class HomeController extends GetxController {
       final newPhotos = await _repository.getPhotos(
         page: _page,
         limit: _limit,
-        favoriteIds: favoriteIds,
+        favoriteIds: favoritePhotos,
       );
       photos.addAll(newPhotos);
       _page++;
@@ -55,7 +54,7 @@ class HomeController extends GetxController {
   }
 
   void toggleFavorite(PhotoModel photo) {
-    if (favoriteIds.contains(photo.id)) {
+    if (photo.isFavorite.value) {
       removeFavorite(photo);
     } else {
       addFavorite(photo);
@@ -63,25 +62,25 @@ class HomeController extends GetxController {
   }
 
   void addFavorite(PhotoModel photo) {
-    if (!favoriteIds.contains(photo.id)) {
-      favoriteIds.add(photo.id);
-      AppLocalStorage.saveFavorites(favoriteIds);
-      photo.isFavorite.value = true; // Update the photo model
-      SnackbarUtil.show('Added to favorites', type: SnackbarType.success);
+    if (!favoritePhotos.any((p) => p.id == photo.id)) {
+      photo.isFavorite.value = true;
+      favoritePhotos.add(photo);
+      AppLocalStorage.saveFavoritePhotos(favoritePhotos.toList());
+      // SnackbarUtil.show('Added to favorites', type: SnackbarType.success);
     }
   }
 
   void removeFavorite(PhotoModel photo) {
-    favoriteIds.remove(photo.id);
-    AppLocalStorage.saveFavorites(favoriteIds);
-    photo.isFavorite.value = false; // Update the photo model
-
-    SnackbarUtil.show('Removed from favorites', type: SnackbarType.success);
+    photo.isFavorite.value = false;
+    favoritePhotos.removeWhere((p) => p.id == photo.id);
+    AppLocalStorage.saveFavoritePhotos(favoritePhotos.toList());
+    // SnackbarUtil.show('Removed from favorites', type: SnackbarType.success);
   }
 
-  bool isFavorite(int id) => favoriteIds.contains(id);
+  bool isFavorite(int id) => favoritePhotos.any((p) => p.id == id);
 
   void loadFavorites() {
-    favoriteIds = AppLocalStorage.getFavorites();
+    final stored = AppLocalStorage.getFavoritePhotos();
+    favoritePhotos.assignAll(stored);
   }
 }

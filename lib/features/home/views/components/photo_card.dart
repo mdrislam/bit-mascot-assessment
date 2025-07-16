@@ -36,7 +36,9 @@ class PhotoCard extends StatelessWidget {
           vertical: AppSizes.paddingSmall,
         ),
         leading: ClipRRect(
-          borderRadius: BorderRadius.circular(8),
+          borderRadius: AppResponsiveInfo.borderRadiusAll(
+            AppSizes.paddingSmall,
+          ),
           child: Image.network(
             photo.thumbnailUrl,
             width: imageSize,
@@ -72,12 +74,18 @@ class PhotoCard extends StatelessWidget {
             fontWeight: FontWeight.w500,
           ),
         ),
-        subtitle: Text(
-          '7.5',
-          style: AppTextStyles.body.copyWith(
-            height: 1.3,
-            color: AppColors.textSecondary,
-          ),
+        subtitle: Row(
+          children: [
+            Text(
+              '7.5',
+              style: AppTextStyles.body.copyWith(
+                height: 1.3,
+                color: AppColors.textSecondary,
+              ),
+            ),
+            Icon(Icons.star,
+                color: AppColors.warning, size: AppResponsiveInfo.icon(AppSizes.iconSmall)),
+          ],
         ),
         trailing: Obx(
           () => IconButton(

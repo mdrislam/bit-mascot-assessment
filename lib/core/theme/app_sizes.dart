@@ -46,4 +46,7 @@ class AppSizes {
   static const double cardElevationZero = 0;
   //separator height
   static const double separatorHeight = 2;
+  // List item height
+  static const double shimmerItemheight = 10;
+  static const double shimmerItemRedius = 30;
 }

@@ -20,6 +20,7 @@ class AppColors {
   static const Color textDisabled = Color(0xFFBDBDBD);
   static const Color textHint = Color(0xFF9E9E9E);
   static const Color textWhite = Color.fromARGB(255, 255, 255, 255);
+  static const Color white = Color.fromARGB(255, 255, 255, 255);
 
   // Status
   static const Color error = Color(0xFFB00020);
@@ -30,4 +31,8 @@ class AppColors {
   // Borders & Dividers
   static const Color border = Color(0xFFDDDDDD);
   static const Color divider = Color.fromARGB(255, 218, 218, 218);
+
+  //shimmer Colors
+  static Color grey300 = Colors.grey[300]!;
+  static Color grey100 = Colors.grey[100]!;
 }

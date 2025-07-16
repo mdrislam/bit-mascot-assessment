@@ -1,5 +1,9 @@
+import 'package:bit_mascot_assessment/core/constants/app_strings.dart';
+import 'package:bit_mascot_assessment/core/routes/app_routes.dart';
+import 'package:bit_mascot_assessment/core/theme/app_colors.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'core/routes/app_pages.dart';
 
 void main() async {
   runApp(MyApp());
@@ -11,18 +15,13 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GetMaterialApp(
-      title: 'Flutter Bit Moscot Assignment',
+      title: AppStrings.appName,
       theme: ThemeData(
-        primarySwatch: Colors.blue,
+        primarySwatch: AppColors.primarySwatch,
+        scaffoldBackgroundColor: AppColors.background,
       ),
-      home: Scaffold(
-        appBar: AppBar(
-          title: Text('GetX Example Home Page'),
-        ),
-        body: Center(
-          child: Text('Welcome to GetX Example!'),
-        ),
-      ),
+      initialRoute: AppRoutes.initial,
+      getPages: AppPages.routes,
       debugShowCheckedModeBanner: false,
     );
   }

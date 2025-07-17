@@ -169,15 +169,10 @@ class MovieDetailScreen extends GetView<DetailsController> {
                                   ),
                                   fit: BoxFit.cover,
                                   errorBuilder: (context, error, stackTrace) {
-                                    return Image.asset(
-                                      'assets/images/flutter_logo.png', // Use your Flutter logo here
-                                      width: AppResponsiveInfo.w(
+                                    return FlutterLogo(
+                                      size: AppResponsiveInfo.icon(
                                         AppSizes.detailsScreenImagewidth,
                                       ),
-                                      height: AppResponsiveInfo.h(
-                                        AppSizes.detailsScreenImagewidth,
-                                      ),
-                                      fit: BoxFit.cover,
                                     );
                                   },
                                 ),

@@ -6,10 +6,13 @@ class LoginController extends GetxController {
   final formKey = GlobalKey<FormState>();
   final emailController = TextEditingController();
   final passwordController = TextEditingController();
+  final FocusNode emailFocusNode = FocusNode();
+  final FocusNode passwordFocusNode = FocusNode();
   final isLoading = false.obs;
 
   login() {
-    FocusScope.of(Get.context!).unfocus(); // dismiss keyboard
+    emailFocusNode.unfocus();
+    passwordFocusNode.unfocus();
     if (formKey.currentState!.validate()) {
       isLoading.value = true;
       // Simulate login process

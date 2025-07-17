@@ -10,6 +10,7 @@ class AppTextfield extends StatelessWidget {
   final bool obscureText;
   final FormFieldValidator<String>? validator;
   final TextInputType keyboardType;
+  final FocusNode? focusNode;
   const AppTextfield({
     super.key,
     this.controller,
@@ -18,6 +19,7 @@ class AppTextfield extends StatelessWidget {
     this.obscureText = false,
     this.validator,
     this.keyboardType = TextInputType.text,
+    this.focusNode,
   });
 
   @override
@@ -25,6 +27,7 @@ class AppTextfield extends StatelessWidget {
     return TextFormField(
       controller: controller,
       obscureText: obscureText,
+      focusNode: focusNode,
       keyboardType: keyboardType,
       decoration: InputDecoration(
         labelText: label,
